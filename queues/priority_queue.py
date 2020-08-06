@@ -59,7 +59,7 @@ class PriorityQueue(object):
         """
         Return the first element in the queue
         """
-        pass
+        return self.data[0]
 
     def check_if_empty(self):
         """
@@ -71,6 +71,11 @@ class PriorityQueue(object):
 @pytest.fixture
 def priority_queue():
     priority_queue = PriorityQueue()
+    priority_queue.enqueue(['item1', 1])
+    priority_queue.enqueue(['item2', 1])
+    priority_queue.enqueue(['item3', 2])
+    priority_queue.enqueue(['item4', 1])
+    priority_queue.enqueue(['item5', 3])
     return priority_queue
 
 
@@ -81,11 +86,6 @@ class TestPriorityQueue(object):
         when enqueued is called,
         must add the item in the correct position based on priority
         """
-        priority_queue.enqueue(['item1', 1])
-        priority_queue.enqueue(['item2', 1])
-        priority_queue.enqueue(['item3', 2])
-        priority_queue.enqueue(['item4', 1])
-        priority_queue.enqueue(['item5', 3])
         assert priority_queue.data == [['item1', 1], ['item2', 1], ['item4', 1], ['item3', 2], ['item5', 3]]
 
     def test_size(self, priority_queue):
@@ -94,11 +94,6 @@ class TestPriorityQueue(object):
         when size is called,
         must return the number of items in the queue.
         """
-        priority_queue.enqueue(['item1', 1])
-        priority_queue.enqueue(['item2', 1])
-        priority_queue.enqueue(['item3', 2])
-        priority_queue.enqueue(['item4', 1])
-        priority_queue.enqueue(['item5', 3])
         assert len(priority_queue.data) == 5
 
     def test_dequeue(self, priority_queue):
@@ -107,9 +102,21 @@ class TestPriorityQueue(object):
         when dequeue is called,
         must return the first added item with highest priority.
         """
-        priority_queue.enqueue(['item1', 1])
-        priority_queue.enqueue(['item2', 1])
-        priority_queue.enqueue(['item3', 2])
-        priority_queue.enqueue(['item4', 1])
-        priority_queue.enqueue(['item5', 3])
         assert priority_queue.dequeue() == ['item1', 1]
+
+    def test_peek(self, priority_queue):
+        """
+        Given a priority queue,
+        when peek is called,
+        must return the first item in the queue
+        """
+        assert priority_queue.peek() == ['item1', 1]
+
+    def test_peek_after_dequeue(self, priority_queue):
+        """
+        Given a priority queue,
+        when peek is called,
+        must return the first item in the queue
+        """
+        priority_queue.dequeue()
+        assert priority_queue.peek() == ['item2', 1]
