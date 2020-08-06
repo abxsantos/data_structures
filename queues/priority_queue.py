@@ -65,7 +65,9 @@ class PriorityQueue(object):
         """
         Check if the queue is empty or not
         """
-        pass
+        if not self.data:
+            return True
+        return False
 
 
 @pytest.fixture
@@ -120,3 +122,14 @@ class TestPriorityQueue(object):
         """
         priority_queue.dequeue()
         assert priority_queue.peek() == ['item2', 1]
+
+    def test_check_if_empty(self):
+        """
+        Given a priority queue,
+        when check_if_empty is called
+        must return False if the queue is not empty otherwise True
+        """
+        priority_queue = PriorityQueue()
+        assert priority_queue.check_if_empty() == True
+        priority_queue.enqueue(['item', 1])
+        assert priority_queue.check_if_empty() == False
