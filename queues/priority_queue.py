@@ -97,3 +97,16 @@ class TestPriorityQueue(object):
         priority_queue.enqueue(['item4', 1])
         priority_queue.enqueue(['item5', 3])
         assert len(priority_queue.data) == 5
+
+    def test_dequeue(self, priority_queue):
+        """
+        Given a priority queue,
+        when dequeue is called,
+        must return the first added item with highest priority.
+        """
+        priority_queue.enqueue(['item1', 1])
+        priority_queue.enqueue(['item2', 1])
+        priority_queue.enqueue(['item3', 2])
+        priority_queue.enqueue(['item4', 1])
+        priority_queue.enqueue(['item5', 3])
+        assert priority_queue.dequeue() == ['item1', 1]
