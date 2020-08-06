@@ -42,9 +42,12 @@ class PriorityQueue(object):
 
     def dequeue(self):
         """
-        Remove an item based on priority
+        Remove an item based on priority and first in first out principles.
         """
-        pass
+        if not self.data:
+            return None
+        else:
+            return self.data.pop(0)
 
     def size(self):
         """
