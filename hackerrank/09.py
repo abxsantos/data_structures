@@ -18,5 +18,3 @@ def fizz_buzz(n):
         else:
             print(number)
 
-
-fizz_buzz(101)

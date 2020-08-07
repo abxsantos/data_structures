@@ -23,6 +23,22 @@ def recursive_fibonacci(n):
     return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
 
 
+def memoize(function):
+    cache = {}
+
+    def memoized_function(*args):
+        if args in cache:
+            return cache[args]
+        result = function(*args)
+        cache[args] = result
+        return result
+    return memoized_function
+
+# memoized_fibonacci = memoize(recursive_fibonacci)
+# value = memoized_fibonacci(6)
+# print(value)
+
+
 class TestFibonacci(object):
 
     @pytest.mark.parametrize('given_index, expected_result', [
