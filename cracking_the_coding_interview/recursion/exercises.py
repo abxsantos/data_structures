@@ -185,22 +185,29 @@ class TestRecursionExercises(object):
     def test_coin_change(self):
         assert coin_change(74, [1, 5, 10, 25], [0] * (74 + 1)) == 8
 
-    def test_recursive_multiplication(self):
-        assert recursive_multiply(5, 2) == 10
-        assert recursive_multiply(2, 3) == 6
+    @pytest.mark.parametrize("param_number1, param_number2, expected_result", [
+        (5, 2, 10), (2, 3, 6)
+    ])
+    def test_recursive_multiplication(self, param_number1, param_number2, expected_result):
+        assert recursive_multiply(param_number1, param_number2) == expected_result
 
-    def test_recursive_exponential(self):
-        assert recursive_exponential(2, 3) == 8
-        assert recursive_exponential(3, 2) == 9
+    @pytest.mark.parametrize("param_base, param_exponent, expected_result", [
+        (2, 3, 8), (3, 2, 9)
+    ])
+    def test_recursive_exponential(self, param_base, param_exponent, expected_result):
+        assert recursive_exponential(param_base, param_exponent) == expected_result
 
-    def test_recursive_print(self):
-        assert recursive_prints(4) == [0, 1, 2, 3, 4]
-        assert recursive_prints(8) == [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    @pytest.mark.parametrize("param_number, expected_result", [
+        (4, [0, 1, 2, 3, 4]), (8, [0, 1, 2, 3, 4, 5, 6, 7, 8])
+    ])
+    def test_recursive_print(self, param_number, expected_result):
+        assert recursive_prints(param_number) == expected_result
 
-    def test_check_if_prime(self):
-        assert check_if_prime(2) is True
-        assert check_if_prime(7) is True
-        assert check_if_prime(4) is False
+    @pytest.mark.parametrize("param_number, expected_result", [
+        (2, True), (7, True), (4, False)
+    ])
+    def test_check_if_prime(self, param_number, expected_result):
+        assert check_if_prime(param_number) is expected_result
 
     @pytest.mark.parametrize("param_number, expected_result", [
         (3, 2), (4, 3), (6, 8), (0, 0), (1, 1), (2, 1)
