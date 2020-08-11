@@ -25,21 +25,32 @@ class BinaryTree(object):
             self.right_child = tree
 
     def get_right_child(self):
-        pass
+        return self.right_child
 
     def get_left_child(self):
-        pass
+        return self.left_child
 
     def set_root_value(self, value):
-        pass
+        new_root = BinaryTree(value)
+        new_root.left_child = self.left_child
+        new_root.right_child = self.right_child
+        self.key = new_root
 
     def get_root_value(self):
-        pass
+        return self.key
 
 
 @pytest.fixture(scope="function")
 def tree():
     tree = BinaryTree(1)
+    return tree
+
+
+@pytest.fixture(scope="function")
+def tree_with_leaves():
+    tree = BinaryTree(1)
+    tree.insert_left(2)
+    tree.insert_right(3)
     return tree
 
 
@@ -57,3 +68,9 @@ class TestBinaryTree(object):
         tree.insert_right(3)
         assert tree.right_child.key == 3
         assert tree.left_child is None
+
+    def test_get_right_child(self, tree_with_leaves):
+        assert tree_with_leaves.get_right_child().key == 3
+
+    def test_get_left_child(self, tree_with_leaves):
+        assert tree_with_leaves.get_left_child().key == 2
